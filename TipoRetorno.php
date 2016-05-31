@@ -1,10 +1,6 @@
 <?php
+namespace lib;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 //header("Content-type: text/xml");
 /**
  * Description of TipoRetorno
@@ -17,26 +13,26 @@ class TipoRetorno {
     
     /**
      * @version 1.0
-     * @todo metodo construtor, é encarregado de verificar se é um objeto ou array e atribuir o valor ao atributo 
+     * @todo metodo construtor, ï¿½ encarregado de verificar se ï¿½ um objeto ou array e atribuir o valor ao atributo 
      * @param type $dados
      */
-    public function __construct( $dados ) {
+    public function __construct( $dados = null ) {
         self::$dados = is_array($dados)? (array) ($dados) : $dados;
     }
     
-	public static function setDados( $dados ) {
+    public static function setDados( $dados ) {
         self::$dados = is_array($dados)? (array) ($dados) : $dados;
     }
 	
 	
-	public static function retorno( $dados, $saida ){
-		self::setDados( $dados );
-		if( strtolower($saida) == "json" ){
-			return self::getJson();
-		} else if( strtolower($saida) == "xml" ) {
-			return self::getXml('wsbci', array(''));
-		}
-	}
+    public static function retorno( $dados, $saida ){
+            self::setDados( $dados );
+            if( strtolower($saida) == "json" ){
+                return self::getJson();
+            } else if( strtolower($saida) == "xml" ) {
+                return self::getXml('ws', array(''));
+            }
+    }
 	
     /**
      * @version 1.0

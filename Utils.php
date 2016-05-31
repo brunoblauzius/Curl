@@ -1,5 +1,5 @@
 <?php
-
+namespace lib;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +17,10 @@ class Utils {
     const DATA_FORMATO_INVALIDO      = 'data de formato inválido';
     
     public $meses = array( 1 => 'Janeiro', 'Fevereiro', 'Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro' );
+    public static $mesesStatic = array( 1 => 'Janeiro', 'Fevereiro', 'Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro' );
+
+    public $diasDaSemana = array( 'Domingo', 'Segunda-Feira', 'Terça-Feira','Quarta-Feira','Quinta-Feira', 'Sexta-Feira', 'Sábado');
+    public static $diasDaSemanaStatic = array( 'Domingo', 'Segunda-Feira', 'Terça-Feira','Quarta-Feira','Quinta-Feira', 'Sexta-Feira', 'Sábado');
     
     public static $replace = array('\n', '\t');
 
@@ -24,6 +28,18 @@ class Utils {
     private function nomeMes( $mes = null ){
         if( in_array( $mes, array_keys($this->meses) ) ){
             return  $this->meses[$mes];
+        } 
+    } 
+    
+    public static function nomeMesStatic( $mes = null ){
+        if( in_array( $mes, array_keys(self::$mesesStatic) ) ){
+            return  self::$mesesStatic[$mes];
+        } 
+    } 
+    
+    public static function nomeDiaDaSemanaStatic( $dia = null ){
+        if( in_array( $dia, array_keys(self::$diasDaSemanaStatic) ) ){
+            return  self::$diasDaSemanaStatic[$dia];
         } 
     } 
     
@@ -140,6 +156,25 @@ class Utils {
 		}
 		return $data;
     }
+    
+    
+    /**
+     * @author Bruno Blauzius
+     * @todo metodo para conversão de datas view/data base
+     * @param string $data
+     * @return styring
+     * @throws Exception
+     * 
+     */
+    public static function returnHours( $data = null ){
+		if( !empty($data) ){				
+			$exData = explode(' ', $data);
+			
+			$data = $exData[1];
+		}
+		return $data;
+    }
+    
     
     /**
      * @author Bruno Blauzius
@@ -423,5 +458,14 @@ class Utils {
             print_r($valor);
         echo '</pre>';
     }
+    
+    public final static function htmlEntityDecode( $html ){
+        return html_entity_decode($html, ENT_QUOTES, 'UTF-8');
+    }
+
+    public final static function htmlEntityEncode( $html ){
+        return htmlentities($html, ENT_QUOTES, 'ISO-8859-1', true);
+    }
+    
     
 }
